@@ -10,7 +10,7 @@ COPY . .
 # Static files are baked into the image and served by WhiteNoise.
 # Media (uploaded photos) lives in a volume owned by the unprivileged app user.
 RUN SECRET_KEY=build-only python manage.py collectstatic --noinput \
- && useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app \
+ && useradd --uid 10001 --create-home --shell /usr/sbin/nologin app \
  && mkdir -p /app/media && chown app /app/media
 
 USER app
