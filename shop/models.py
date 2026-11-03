@@ -4,6 +4,11 @@ from pathlib import Path
 from django.core.files.base import ContentFile
 from django.db import models
 from PIL import Image, ImageOps
+from pillow_heif import register_heif_opener
+
+# Let Pillow (and so Django's ImageField check) open iPhone HEIC/HEIF photos;
+# ProductImage.save() then converts them to JPEG like any other upload.
+register_heif_opener()
 
 MAX_SIDE = 1200
 
