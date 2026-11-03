@@ -1,0 +1,248 @@
+{
+ "settings": {
+  "shopName": "Swift Sport",
+  "tagline": "Sports & Tactical Gear",
+  "phone": "0712 984 925",
+  "whatsapp": "254712984925",
+  "location": "Airport North Road, Soweto–Baraka, opposite Embakasi Garrison, Embakasi, Nairobi",
+  "hours": "Open daily, 8am – 8pm"
+ },
+ "products": [
+  {
+   "id": "training-set",
+   "name": "Full training set",
+   "category": "Sportswear",
+   "price": 2150,
+   "priceMax": 0,
+   "description": "Compression top, shorts and inner tights. The complete gym or training outfit.",
+   "images": [
+    "p-training-set-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "compression-top",
+   "name": "Compression long-sleeve top",
+   "category": "Sportswear",
+   "price": 650,
+   "priceMax": 0,
+   "description": "Stretch fit for training and layering. Grey, blue, black and red.",
+   "images": [
+    "p-compression-top-1.jpg",
+    "p-compression-top-2.jpg",
+    "p-compression-top-3.jpg",
+    "p-compression-top-4.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "two-in-one-shorts",
+   "name": "Two-in-one shorts",
+   "category": "Sportswear",
+   "price": 1200,
+   "priceMax": 0,
+   "description": "Shorts with built-in tights for running and gym.",
+   "images": [
+    "p-two-in-one-shorts-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "training-tights",
+   "name": "Training tights",
+   "category": "Sportswear",
+   "price": 800,
+   "priceMax": 0,
+   "description": "Full-length compression tights.",
+   "images": [
+    "p-training-tights-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "track-pants",
+   "name": "Track pants",
+   "category": "Sportswear",
+   "price": 1500,
+   "priceMax": 0,
+   "description": "Zip pockets and zip ankles. Many colours on the rack.",
+   "images": [
+    "p-track-pants-1.jpg",
+    "p-track-pants-2.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "tracksuit",
+   "name": "Tracksuit",
+   "category": "Sportswear",
+   "price": 3500,
+   "priceMax": 0,
+   "description": "Matching top and pants.",
+   "images": [],
+   "inStock": true
+  },
+  {
+   "id": "football-jerseys",
+   "name": "Football club jerseys",
+   "category": "Sportswear",
+   "price": 600,
+   "priceMax": 0,
+   "description": "Club jerseys for fans and team training.",
+   "images": [
+    "p-football-jerseys-1.jpg",
+    "p-football-jerseys-2.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "running-shoes",
+   "name": "Running shoes",
+   "category": "Shoes",
+   "price": 3500,
+   "priceMax": 5000,
+   "description": "Cushioned running shoes from top brands. Price depends on the model.",
+   "images": [
+    "p-running-shoes-1.jpg",
+    "p-running-shoes-2.jpg",
+    "p-running-shoes-3.jpg",
+    "p-running-shoes-4.jpg",
+    "p-running-shoes-5.jpg",
+    "p-running-shoes-6.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "caps",
+   "name": "Caps",
+   "category": "Caps & more",
+   "price": 500,
+   "priceMax": 0,
+   "description": "Baseball and mesh trucker caps in several colours.",
+   "images": [
+    "p-caps-1.jpg",
+    "p-caps-2.jpg",
+    "p-caps-3.jpg",
+    "p-caps-4.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "hiking-boots",
+   "name": "Hiking & tactical boots",
+   "category": "Boots",
+   "price": 6500,
+   "priceMax": 0,
+   "description": "Tough boots for hiking, field work and duty. Ask for your size.",
+   "images": [
+    "p-hiking-boots-1.jpg",
+    "p-hiking-boots-2.jpg",
+    "p-hiking-boots-3.jpg",
+    "p-hiking-boots-4.jpg",
+    "p-hiking-boots-5.jpg",
+    "p-hiking-boots-6.jpg",
+    "p-hiking-boots-7.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "casual-sneakers",
+   "name": "Casual sneakers",
+   "category": "Shoes",
+   "price": 1500,
+   "priceMax": 0,
+   "description": "Everyday low-top sneakers in several colour mixes.",
+   "images": [
+    "p-casual-sneakers-1.jpg",
+    "p-casual-sneakers-2.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "ladies-sneakers",
+   "name": "Ladies sparkle sneakers",
+   "category": "Shoes",
+   "price": 1500,
+   "priceMax": 0,
+   "description": "Light sneakers with sequin detail. Pink, grey, white and black.",
+   "images": [
+    "p-ladies-sneakers-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "sandals",
+   "name": "Buckle sandals",
+   "category": "Shoes",
+   "price": 1500,
+   "priceMax": 0,
+   "description": "Comfortable two-buckle slides. Black, tan and brown.",
+   "images": [
+    "p-sandals-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "official-shoes",
+   "name": "Official shoes",
+   "category": "Shoes",
+   "price": 2500,
+   "priceMax": 0,
+   "description": "Smart loafers for work and occasions.",
+   "images": [
+    "p-official-shoes-1.jpg",
+    "p-official-shoes-2.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "white-sneakers",
+   "name": "White sneakers",
+   "category": "Shoes",
+   "price": 2500,
+   "priceMax": 0,
+   "description": "Clean chunky white sneakers.",
+   "images": [
+    "p-white-sneakers-1.jpg",
+    "p-white-sneakers-2.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "football-turfs",
+   "name": "Football turfs",
+   "category": "Shoes",
+   "price": 3500,
+   "priceMax": 0,
+   "description": "Turf shoes for astro and hard pitches. Silver, black, blue and orange.",
+   "images": [
+    "p-football-turfs-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "sock-sneakers",
+   "name": "Knit sock sneakers",
+   "category": "Shoes",
+   "price": 0,
+   "priceMax": 0,
+   "description": "Breathable knit upper with a chunky sole.",
+   "images": [
+    "p-sock-sneakers-1.jpg"
+   ],
+   "inStock": true
+  },
+  {
+   "id": "rain-poncho",
+   "name": "Rain poncho",
+   "category": "Caps & more",
+   "price": 2500,
+   "priceMax": 0,
+   "description": "Waterproof hooded poncho for the field and the rainy season.",
+   "images": [
+    "p-rain-poncho-1.jpg"
+   ],
+   "inStock": true
+  }
+ ]
+}

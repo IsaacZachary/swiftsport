@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Swift Sport Embakasi</title>
+<meta name="description" content="Swift Sport, Embakasi: running shoes, hiking and tactical boots, training kits, jerseys and caps. See prices and order on WhatsApp.">
+<meta property="og:title" content="Swift Sport · Sports & Tactical Gear">
+<meta property="og:description" content="Shoes, boots, training kits and caps in Embakasi, Nairobi. Order on WhatsApp.">
+<meta property="og:image" content="shopfront.jpg">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: stencil wordmark bar, banner hero with the shop card, category chips, product grid, visit card; #admin swaps in the shop manager */
+:root{
+  --ground:#EEEBE1; --paper:#FFFFFF; --ink:#1B2116; --ink-2:#4B5342; --line:#D9D4C3;
+  --olive:#3B4A25; --olive-2:#56683A; --green:#1A7A3B; --green-ink:#FFFFFF; --signal:#E2601A; --sand:#D8CCA6;
+  --stencil:'Big Shoulders Stencil Display','Arial Narrow',Impact,sans-serif;
+  --body:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--ground); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.5; margin:0}
+img{max-width:100%; display:block}
+.wrap{max-width:1180px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0; line-height:1; text-wrap:balance}
+p{margin:0}
+a{color:var(--green)}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--signal); outline-offset:2px}
+[hidden]{display:none!important}
+section,.panel{scroll-margin-top:76px}
+
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:2px solid transparent; border-radius:10px; padding:12px 18px; font-weight:700; font-size:16px; text-decoration:none; cursor:pointer; line-height:1.1}
+.btn svg{width:20px; height:20px; flex-shrink:0}
+.btn-wa{background:var(--green); color:var(--green-ink)}
+.btn-dark{background:var(--ink); color:var(--paper)}
+.btn-line{background:transparent; border-color:var(--ink); color:var(--ink)}
+.btn-sm{padding:8px 12px; font-size:14px}
+.btn-danger{background:transparent; border-color:#B3261E; color:#B3261E}
+
+/* header */
+.bar{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:env(safe-area-inset-top, 0px); z-index:20}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:21; background:var(--paper)}
+.bar .wrap{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:10px}
+.mark{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink)}
+.mark img{height:46px; width:auto; display:block}
+.mark b{display:block; font-family:var(--stencil); font-weight:900; font-size:28px; letter-spacing:0.02em; line-height:0.9; color:var(--green)}
+.mark span{display:block; font-family:var(--stencil); font-weight:800; font-size:14px; letter-spacing:0.14em; color:var(--olive)}
+
+/* hero */
+.hero{position:relative; overflow:hidden}
+.camo{position:absolute; inset:0; background:#3E4B27 url(banner.jpg) right center / cover no-repeat}
+.hero .wrap{position:relative; display:flex; align-items:center; min-height:520px; padding-block:48px 56px}
+.hero-card{max-width:560px}
+.hero-card{background:var(--paper); border-radius:18px; padding:28px; box-shadow:0 18px 40px rgba(27,33,22,0.25); display:flex; flex-direction:column; gap:16px; min-width:0}
+.tag{display:inline-flex; align-self:flex-start; background:var(--signal); color:#fff; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:5px 10px; border-radius:6px}
+.hero h1{font-family:var(--stencil); font-weight:900; font-size:clamp(46px, 7vw, 82px); text-transform:uppercase; letter-spacing:0.01em; line-height:0.92}
+.hero h1 em{font-style:normal; color:var(--green)}
+.hero p{font-size:19px; color:var(--ink-2); max-width:40ch}
+.facts{display:flex; flex-wrap:wrap; gap:8px}
+.fact{display:inline-flex; align-items:center; gap:7px; background:var(--ground); border-radius:999px; padding:7px 13px; font-size:15px; font-weight:600}
+.fact svg{width:17px; height:17px; color:var(--olive)}
+.ctas{display:flex; flex-wrap:wrap; gap:10px}
+.visit-photo{margin:0; border-radius:14px; overflow:hidden; border:5px solid var(--sand); box-shadow:0 16px 34px rgba(0,0,0,0.3); transform:rotate(-1.2deg)}
+.visit-photo img{width:100%; aspect-ratio:1/1; object-fit:cover}
+.visit-info{display:flex; flex-direction:column; gap:18px; min-width:0}
+
+/* catalogue */
+.cat{padding-block:44px 24px}
+.cat-head{display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:flex-end; margin-bottom:18px}
+.cat-head h2, .visit h2{font-family:var(--stencil); font-weight:900; font-size:clamp(34px, 5vw, 52px); text-transform:uppercase}
+.search{display:flex; align-items:center; gap:8px; background:var(--paper); border:1.5px solid var(--line); border-radius:10px; padding:0 12px; min-width:0; flex:0 1 320px}
+.search svg{width:18px; height:18px; color:var(--ink-2); flex-shrink:0}
+.search input{border:0; background:transparent; padding:11px 0; width:100%; min-width:0; outline:none}
+.chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px}
+.chip{border:1.5px solid var(--line); background:var(--paper); border-radius:999px; padding:8px 15px; font-weight:700; font-size:15px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--olive); border-color:var(--olive); color:#fff}
+.grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px}
+.card{background:var(--paper); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; border:1px solid var(--line); min-width:0}
+.card .ph{position:relative; display:block; width:100%; aspect-ratio:4/5; background:#F6F4EE; border:0; padding:0; cursor:pointer}
+.card .ph img{width:100%; height:100%; object-fit:cover}
+.count{position:absolute; right:8px; bottom:8px; background:rgba(27,33,22,0.82); color:#fff; font-size:12px; font-weight:700; padding:3px 8px; border-radius:999px}
+.out{position:absolute; left:8px; top:8px; background:#B3261E; color:#fff; font-size:12px; font-weight:700; padding:3px 8px; border-radius:6px}
+.card .info{padding:12px 14px 14px; display:flex; flex-direction:column; gap:6px; flex:1}
+.card h3{font-size:18px; font-weight:700; line-height:1.2}
+.card .kind{font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--olive-2)}
+.price{font-family:var(--stencil); font-weight:900; font-size:26px; letter-spacing:0.01em; line-height:1; font-variant-numeric:tabular-nums}
+.price.ask{font-size:20px; color:var(--ink-2)}
+.card .btn{margin-top:auto}
+.nophoto{width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:var(--olive); color:var(--sand); font-family:var(--stencil); font-weight:800; font-size:22px; text-transform:uppercase; letter-spacing:0.06em; text-align:center; padding:10px}
+.nophoto small{font-family:var(--body); font-size:13px; letter-spacing:0; text-transform:none; font-weight:600; opacity:.85}
+.empty{background:var(--paper); border:1.5px dashed var(--line); border-radius:14px; padding:28px; text-align:center; color:var(--ink-2)}
+
+/* visit */
+.visit{padding-block:28px 56px}
+.visit-card{background:var(--olive); color:#fff; border-radius:18px; padding:28px; display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); gap:32px; align-items:center}
+.visit-card h2{color:var(--sand)}
+.visit dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:10px 16px; margin:16px 0 0; font-size:17px}
+.visit dt{color:var(--sand); font-weight:600}
+.visit dd{margin:0; font-weight:600}
+.num{user-select:all; font-variant-numeric:tabular-nums}
+.visit .ctas .btn-line{border-color:#fff; color:#fff}
+.copied{font-size:14px; font-weight:700; color:var(--sand)}
+footer{border-top:1px solid var(--line); background:var(--paper)}
+footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; padding-block:18px; font-size:14px; color:var(--ink-2)}
+footer a{color:var(--ink-2)}
+
+/* product dialog */
+dialog{border:0; border-radius:16px; padding:0; width:min(560px, calc(100vw - 24px)); max-height:calc(100dvh - 24px); background:var(--paper); color:var(--ink)}
+dialog::backdrop{background:rgba(20,24,16,0.6)}
+.dlg{display:flex; flex-direction:column; max-height:calc(100dvh - 24px); overflow:auto}
+.dlg-main{position:relative; background:#F6F4EE}
+.dlg-main img{width:100%; aspect-ratio:1/1; object-fit:contain}
+.dlg-main .nophoto{aspect-ratio:1/1}
+.x{position:absolute; top:10px; right:10px; width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,0.92); font-size:24px; cursor:pointer; line-height:1}
+.thumbs{display:flex; gap:8px; padding:10px 16px 0; overflow-x:auto}
+.thumbs button{border:2px solid transparent; border-radius:8px; padding:0; width:58px; height:58px; flex-shrink:0; overflow:hidden; cursor:pointer; background:#F6F4EE}
+.thumbs button[aria-current="true"]{border-color:var(--green)}
+.thumbs img{width:100%; height:100%; object-fit:cover}
+.dlg-body{padding:16px; display:flex; flex-direction:column; gap:10px}
+.dlg-body h3{font-size:24px; font-weight:700; line-height:1.2}
+
+/* admin */
+.admin{padding-block:28px 60px}
+.admin .wrap{display:flex; flex-direction:column; gap:18px; max-width:860px}
+.admin h1{font-family:var(--stencil); font-weight:900; font-size:44px; text-transform:uppercase}
+.panel{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px}
+.panel h2{font-size:20px; font-weight:700}
+.note{border-radius:10px; padding:12px 14px; font-size:15px; font-weight:500}
+.note.demo{background:#FFF3D6; color:#5C3D00}
+.note.err{background:#FDE7E5; color:#7A1A12}
+.note.ok{background:#E3F3E7; color:#0F4D24}
+.field{display:flex; flex-direction:column; gap:5px; font-size:14px; font-weight:700; color:var(--ink-2)}
+.field input,.field select,.field textarea{border:1.5px solid var(--line); border-radius:9px; padding:11px; background:#FBFAF6; font-size:16px; font-weight:500; color:var(--ink); width:100%; min-width:0}
+.field textarea{min-height:80px; resize:vertical}
+.row2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px}
+.check{display:flex; align-items:center; gap:10px; font-weight:600}
+.check input{width:22px; height:22px; accent-color:var(--green)}
+.actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.alist{display:flex; flex-direction:column}
+.arow{display:flex; align-items:center; gap:12px; padding:10px 0; border-top:1px solid var(--line)}
+.arow:first-child{border-top:0}
+.arow img,.arow .nopic{width:56px; height:56px; border-radius:8px; object-fit:cover; flex-shrink:0; background:var(--olive)}
+.arow .t{flex:1; min-width:0}
+.arow .t b{display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.arow .t span{font-size:14px; color:var(--ink-2)}
+.pics{display:flex; flex-wrap:wrap; gap:10px}
+.pic{position:relative; width:84px; height:84px; border-radius:9px; overflow:hidden; background:#F6F4EE}
+.pic img{width:100%; height:100%; object-fit:cover}
+.pic button{position:absolute; top:4px; right:4px; width:28px; height:28px; border-radius:50%; border:0; background:rgba(0,0,0,0.7); color:#fff; cursor:pointer; font-size:16px; line-height:1}
+.addpic{width:84px; height:84px; border-radius:9px; border:2px dashed var(--line); display:flex; align-items:center; justify-content:center; text-align:center; font-size:13px; font-weight:700; color:var(--ink-2); cursor:pointer}
+.addpic input{position:absolute; width:1px; height:1px; opacity:0}
+.status{font-size:14px; font-weight:600; color:var(--ink-2)}
+
+@media (max-width:1000px){ .grid{grid-template-columns:repeat(3, minmax(0,1fr))} }
+@media (max-width:820px){
+  .camo{background-size:auto 250px; background-position:78% top}
+  .hero .wrap{min-height:0; padding-block:190px 28px}
+  .visit-photo{max-width:420px}
+  .visit-card{grid-template-columns:minmax(0,1fr)}
+  .grid{grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+}
+@media (max-width:520px){
+  .hero-card{padding:20px}
+  .mark b{font-size:24px}
+  .bar .btn-wa span{display:none}
+  .card h3{font-size:16px}
+  .price{font-size:22px}
+  .card .btn{padding:10px 8px; font-size:14px}
+  .row2{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:no-preference){ .card{transition:transform .15s ease} .card:hover{transform:translateY(-3px)} }
+</style>
+</head>
+<body>
+
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Swift Sport home">
+      <img src="logo.png" alt="Swift Sport Tactical Gear" width="190" height="46">
+    </a>
+    <a class="btn btn-wa btn-sm js-wa" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg>
+      <span>Order on WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<main id="shopView">
+  <section class="hero" id="top">
+    <div class="camo" id="camo" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-card">
+        <span class="tag">Embakasi · Nairobi</span>
+        <h1>Gear up for <em>sport</em> and duty.</h1>
+        <p>Running shoes, hiking and tactical boots, training kits, jerseys and caps. See the price here, then order on WhatsApp or pass by the shop.</p>
+        <div class="facts">
+          <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-s="hours">Open daily, 8am – 8pm</span></span>
+          <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Opposite Embakasi Garrison</span>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-dark" href="#shop">Browse products</a>
+          <a class="btn btn-wa js-wa" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="shop">
+    <div class="wrap">
+      <div class="cat-head">
+        <h2>Shop the gear</h2>
+        <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search boots, caps, jerseys…" aria-label="Search products"></label>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div class="visit-card">
+        <figure class="visit-photo"><img src="shopfront.jpg" alt="The Swift Sport / Tactical Gear shop front in Embakasi" loading="lazy"></figure>
+        <div class="visit-info">
+          <div>
+          <h2>Visit the shop</h2>
+          <dl>
+            <dt>Where</dt><dd data-s="location">Airport North Road, Soweto–Baraka, opposite Embakasi Garrison, Embakasi, Nairobi</dd>
+            <dt>Hours</dt><dd data-s="hours">Open daily, 8am – 8pm</dd>
+            <dt>Call</dt><dd class="num" id="phoneNum" data-s="phone">0712 984 925</dd>
+          </dl>
+          </div>
+        <div class="ctas">
+          <a class="btn btn-wa js-wa" href="#">Order on WhatsApp</a>
+          <a class="btn btn-line" id="mapLink" href="https://www.google.com/maps/search/?api=1&amp;query=Embakasi%20Garrison%20Airport%20North%20Road%20Nairobi" target="_blank" rel="noopener">Get directions</a>
+          <button class="btn btn-line" type="button" id="copyPhone">Copy number</button>
+          <span class="copied" id="copied" hidden>Copied</span>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="adminView" class="admin" hidden>
+  <div class="wrap">
+    <h1>Shop manager</h1>
+    <div class="note demo" id="demoNote" hidden>Preview mode. Changes are saved on this device only, so you can try adding, editing and deleting products. Password for the preview: <b>demo</b></div>
+    <div class="note err" id="setupNote" hidden></div>
+
+    <form class="panel" id="loginForm">
+      <h2>Log in</h2>
+      <label class="field">Admin password<input id="pw" type="password" autocomplete="current-password" required></label>
+      <div class="actions"><button class="btn btn-dark" type="submit">Log in</button><span class="status" id="loginMsg" role="status"></span></div>
+    </form>
+
+    <div id="manager" hidden>
+      <div class="panel">
+        <div class="actions" style="justify-content:space-between"><h2 id="countLabel">Products</h2><button class="btn btn-wa btn-sm" type="button" id="newBtn">+ Add product</button></div>
+        <div class="note ok" id="savedNote" hidden></div>
+        <div class="alist" id="alist"></div>
+      </div>
+
+      <form class="panel" id="editForm" hidden style="margin-top:18px">
+        <h2 id="editTitle">Add product</h2>
+        <label class="field">Product name<input id="fName" required maxlength="80"></label>
+        <div class="row2">
+          <label class="field">Category<input id="fCat" list="catList" required maxlength="40"></label>
+          <label class="check" style="align-self:end; padding-bottom:10px"><input type="checkbox" id="fStock" checked> In stock</label>
+        </div>
+        <datalist id="catList"></datalist>
+        <div class="row2">
+          <label class="field">Price (KES), 0 = ask for price<input id="fPrice" type="number" min="0" step="50" inputmode="numeric" required></label>
+          <label class="field">Highest price (optional, for a range)<input id="fMax" type="number" min="0" step="50" inputmode="numeric"></label>
+        </div>
+        <label class="field">Description<textarea id="fDesc" maxlength="400"></textarea></label>
+        <div class="field">Photos (first photo shows on the card)
+          <div class="pics" id="pics"></div>
+        </div>
+        <div class="actions"><button class="btn btn-dark" type="submit" id="saveBtn">Save product</button><button class="btn btn-line" type="button" id="cancelBtn">Cancel</button><span class="status" id="editMsg" role="status"></span></div>
+      </form>
+
+      <form class="panel" id="settingsForm" style="margin-top:18px">
+        <h2>Shop details</h2>
+        <div class="row2">
+          <label class="field">Phone shown on the site<input id="sPhone" maxlength="30"></label>
+          <label class="field">WhatsApp number (2547…)<input id="sWa" maxlength="15" inputmode="numeric"></label>
+        </div>
+        <label class="field">Opening hours<input id="sHours" maxlength="60"></label>
+        <label class="field">Location<input id="sLoc" maxlength="160"></label>
+        <div class="actions"><button class="btn btn-dark" type="submit">Save details</button><span class="status" id="setMsg" role="status"></span></div>
+      </form>
+
+      <div class="actions" style="margin-top:18px"><a class="btn btn-line" href="#shop">View the shop</a><button class="btn btn-line" type="button" id="logoutBtn">Log out</button></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© <span id="yr">2026</span> Swift Sport · Embakasi, Nairobi</span><span>Website by <a href="https://mobkazi.com" target="_blank" rel="noopener">MobKazi</a> · <a href="#admin">Admin</a></span></div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg">
+    <div class="dlg-main" id="dlgMain"></div>
+    <div class="thumbs" id="dlgThumbs"></div>
+    <div class="dlg-body">
+      <span class="kind" id="dlgCat" style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--olive-2)"></span>
+      <h3 id="dlgTitle"></h3>
+      <div class="price" id="dlgPrice"></div>
+      <p id="dlgDesc" style="color:var(--ink-2)"></p>
+      <a class="btn btn-wa" id="dlgWa" href="#" target="_blank" rel="noopener">Order on WhatsApp</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var DEMO_KEY = 'swiftsport-demo-data', PW_KEY = 'swiftsport-admin';
+  var state = { data:null, mode:'demo', setupError:'', cat:'All', q:'' };
+  var $ = function(id){ return document.getElementById(id); };
+  function el(tag, attrs, kids){
+    var e = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function(a){
+      var v = attrs[a];
+      if (a === 'text') e.textContent = v; else if (a.slice(0,2) === 'on') e.addEventListener(a.slice(2), v); else if (v !== null && v !== undefined) e.setAttribute(a, v);
+    });
+    (kids || []).forEach(function(k){ if (k) e.appendChild(typeof k === 'string' ? document.createTextNode(k) : k); });
+    return e;
+  }
+  function store(k, v){ try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch(e){ return null; } }
+  function sess(k, v){ try { if (v === undefined) return sessionStorage.getItem(k); if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch(e){ return null; } }
+  function kes(n){ return 'KES ' + Number(n).toLocaleString('en-US'); }
+  function priceText(p){ if (!p.price) return 'Ask for price'; return p.priceMax && p.priceMax > p.price ? kes(p.price) + ' – ' + Number(p.priceMax).toLocaleString('en-US') : kes(p.price); }
+  function waLink(text){ var n = (state.data && state.data.settings.whatsapp) || '254712984925'; return 'https://wa.me/' + n.replace(/\D/g,'') + (text ? '?text=' + encodeURIComponent(text) : ''); }
+  function orderText(p){ return 'Hello Swift Sport, I am interested in the ' + p.name + (p.price ? ' (' + priceText(p) + ')' : '') + '. Is it available?'; }
+  function noPhoto(){ return el('div', {class:'nophoto'}, ['Swift Sport', el('small', {text:'Photo coming soon'})]); }
+
+
+  /* ---------- data ---------- */
+  function load(){
+    return fetch('/api/products', {cache:'no-store'}).then(function(r){
+      var ct = r.headers.get('content-type') || '';
+      if (ct.indexOf('json') < 0) throw 'noapi';
+      return r.json().then(function(j){
+        if (r.ok){ state.mode = 'live'; return j.data || null; }
+        state.mode = 'setup'; state.setupError = j.error || 'The product store is not connected yet.'; return null;
+      });
+    }).catch(function(){ state.mode = 'demo'; return null; }).then(function(d){
+      if (d) return d;
+      if (state.mode === 'demo'){ var saved = store(DEMO_KEY); if (saved){ try { return JSON.parse(saved); } catch(e){} } }
+      return fetch('data.json', {cache:'no-store'}).then(function(r){ return r.json(); });
+    }).then(function(d){ state.data = d; renderAll(); }).catch(function(){
+      $('grid').textContent = ''; $('grid').appendChild(el('div', {class:'empty', text:'Products could not load. Check your connection and refresh the page.'}));
+    });
+  }
+  function persist(){
+    if (state.mode === 'live'){
+      return fetch('/api/products', {method:'PUT', headers:{'content-type':'application/json', 'x-admin-key': sess(PW_KEY) || ''}, body: JSON.stringify(state.data)})
+        .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ if (!r.ok) throw (j.error || 'Could not save. Try again.'); }); });
+    }
+    if (state.mode === 'demo'){
+      try { localStorage.setItem(DEMO_KEY, JSON.stringify(state.data)); return Promise.resolve(); }
+      catch(e){ return Promise.reject('This phone ran out of preview storage. Use smaller photos.'); }
+    }
+    return Promise.reject(state.setupError || 'The product store is not connected yet.');
+  }
+
+  /* ---------- shop ---------- */
+  function renderSettings(){
+    var s = state.data.settings;
+    document.querySelectorAll('[data-s]').forEach(function(n){ var v = s[n.getAttribute('data-s')]; if (v) n.textContent = v; });
+    document.querySelectorAll('.js-wa').forEach(function(a){ a.href = waLink('Hello Swift Sport, I would like to order.'); a.target = '_blank'; a.rel = 'noopener'; });
+  }
+  function categories(){ var seen = []; state.data.products.forEach(function(p){ if (p.category && seen.indexOf(p.category) < 0) seen.push(p.category); }); return seen; }
+  function renderChips(){
+    var box = $('chips'); box.textContent = '';
+    ['All'].concat(categories()).forEach(function(c){
+      box.appendChild(el('button', {type:'button', class:'chip', 'aria-pressed': String(state.cat === c), text:c, onclick:function(){ state.cat = c; renderChips(); renderGrid(); }}));
+    });
+  }
+  function renderGrid(){
+    var grid = $('grid'); grid.textContent = '';
+    var q = state.q.trim().toLowerCase();
+    var list = state.data.products.filter(function(p){
+      return (state.cat === 'All' || p.category === state.cat) && (!q || (p.name + ' ' + p.category + ' ' + (p.description || '')).toLowerCase().indexOf(q) >= 0);
+    });
+    if (!list.length){ grid.appendChild(el('div', {class:'empty', style:'grid-column:1/-1', text: state.data.products.length ? 'Nothing matches that search. Try another word or ask us on WhatsApp.' : 'Products are coming soon. Ask us on WhatsApp for today’s stock.'})); return; }
+    list.forEach(function(p){
+      var ph = el('button', {class:'ph', type:'button', 'aria-label':'View ' + p.name, onclick:function(){ openProduct(p); }});
+      if (p.images && p.images.length){ ph.appendChild(el('img', {src:p.images[0], alt:p.name, loading:'lazy'})); if (p.images.length > 1) ph.appendChild(el('span', {class:'count', text: p.images.length + ' photos'})); }
+      else ph.appendChild(noPhoto());
+      if (p.inStock === false) ph.appendChild(el('span', {class:'out', text:'Out of stock'}));
+      grid.appendChild(el('article', {class:'card'}, [ph, el('div', {class:'info'}, [
+        el('span', {class:'kind', text:p.category || ''}),
+        el('h3', {text:p.name}),
+        el('div', {class: 'price' + (p.price ? '' : ' ask'), text: priceText(p)}),
+        el('a', {class:'btn btn-wa', href: waLink(orderText(p)), target:'_blank', rel:'noopener', text:'Order on WhatsApp'})
+      ])]));
+    });
+  }
+  function openProduct(p){
+    var main = $('dlgMain'), th = $('dlgThumbs'), imgs = p.images || [];
+    function show(i){
+      main.textContent = '';
+      main.appendChild(imgs.length ? el('img', {src:imgs[i], alt:p.name + ', photo ' + (i+1)}) : noPhoto());
+      main.appendChild(el('button', {class:'x', type:'button', 'aria-label':'Close', text:'×', onclick:function(){ $('dlg').close(); }}));
+      Array.prototype.forEach.call(th.children, function(b, j){ b.setAttribute('aria-current', String(i === j)); });
+    }
+    th.textContent = ''; th.hidden = imgs.length < 2;
+    imgs.forEach(function(src, i){ th.appendChild(el('button', {type:'button', 'aria-label':'Photo ' + (i+1), onclick:function(){ show(i); }}, [el('img', {src:src, alt:''})])); });
+    $('dlgCat').textContent = p.category || ''; $('dlgTitle').textContent = p.name;
+    $('dlgPrice').textContent = priceText(p) + (p.inStock === false ? ' · Out of stock' : '');
+    $('dlgDesc').textContent = p.description || '';
+    $('dlgWa').href = waLink(orderText(p));
+    show(0);
+    if ($('dlg').showModal) $('dlg').showModal(); else $('dlg').setAttribute('open', '');
+  }
+  $('dlg').addEventListener('click', function(e){ if (e.target === this) this.close(); });
+  $('q').addEventListener('input', function(){ state.q = this.value; renderGrid(); });
+  $('copyPhone').addEventListener('click', function(){
+    var t = $('phoneNum').textContent.replace(/\s/g,'');
+    function done(){ $('copied').hidden = false; setTimeout(function(){ $('copied').hidden = true; }, 2000); }
+    function fallback(){ var r = document.createRange(); r.selectNodeContents($('phoneNum')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    try { navigator.clipboard.writeText(t).then(done, fallback); } catch(e){ fallback(); }
+  });
+
+  /* ---------- admin ---------- */
+  var editing = null, draftImgs = [];
+  function route(){
+    var admin = location.hash === '#admin';
+    $('shopView').hidden = admin; $('adminView').hidden = !admin;
+    if (admin){ window.scrollTo(0,0); renderAdmin(); }
+  }
+  function loggedIn(){ return !!sess(PW_KEY); }
+  function renderAdmin(){
+    if (!state.data) return;
+    $('demoNote').hidden = state.mode !== 'demo';
+    $('setupNote').hidden = state.mode !== 'setup';
+    $('setupNote').textContent = 'The product store is not connected yet: ' + state.setupError;
+    $('loginForm').hidden = loggedIn(); $('manager').hidden = !loggedIn();
+    if (!loggedIn()) return;
+    var list = $('alist'); list.textContent = '';
+    $('countLabel').textContent = state.data.products.length + ' products';
+    state.data.products.forEach(function(p, i){
+      var del = el('button', {class:'btn btn-danger btn-sm', type:'button', text:'Delete'});
+      del.addEventListener('click', function(){
+        if (!del.dataset.armed){ del.dataset.armed = '1'; del.textContent = 'Tap again'; return; }
+        var removed = state.data.products.splice(i, 1);
+        persist().then(function(){ flash('Deleted ' + p.name + '.'); renderAll(); }, function(err){ state.data.products.splice(i, 0, removed[0]); flash(String(err), true); });
+      });
+      list.appendChild(el('div', {class:'arow'}, [
+        p.images && p.images.length ? el('img', {src:p.images[0], alt:''}) : el('div', {class:'nopic'}),
+        el('div', {class:'t'}, [el('b', {text:p.name}), el('span', {text: priceText(p) + ' · ' + (p.category || '') + (p.inStock === false ? ' · Out of stock' : '')})]),
+        el('button', {class:'btn btn-line btn-sm', type:'button', text:'Edit', onclick:function(){ openEditor(p); }}),
+        del
+      ]));
+    });
+    var s = state.data.settings;
+    $('sPhone').value = s.phone || ''; $('sWa').value = s.whatsapp || ''; $('sHours').value = s.hours || ''; $('sLoc').value = s.location || '';
+    var dl = $('catList'); dl.textContent = ''; categories().forEach(function(c){ dl.appendChild(el('option', {value:c})); });
+  }
+  function flash(msg, bad){ var n = $('savedNote'); n.hidden = false; n.className = 'note ' + (bad ? 'err' : 'ok'); n.textContent = msg; clearTimeout(flash.t); flash.t = setTimeout(function(){ n.hidden = true; }, 4000); }
+  $('loginForm').addEventListener('submit', function(e){
+    e.preventDefault(); var pw = $('pw').value, msg = $('loginMsg');
+    if (state.mode === 'demo'){ if (pw !== 'demo'){ msg.textContent = 'Wrong password. In the preview it is: demo'; return; } sess(PW_KEY, pw); renderAdmin(); return; }
+    msg.textContent = 'Checking…';
+    fetch('/api/products', {method:'POST', headers:{'x-admin-key':pw}}).then(function(r){
+      if (r.ok){ sess(PW_KEY, pw); $('pw').value = ''; msg.textContent = ''; renderAdmin(); }
+      else msg.textContent = r.status === 401 ? 'Wrong password. Try again.' : 'Could not check the password. Try again.';
+    }, function(){ msg.textContent = 'No connection. Try again.'; });
+  });
+  $('logoutBtn').addEventListener('click', function(){ sess(PW_KEY, null); renderAdmin(); });
+  $('newBtn').addEventListener('click', function(){ openEditor(null); });
+  $('cancelBtn').addEventListener('click', function(){ $('editForm').hidden = true; editing = null; });
+
+  function openEditor(p){
+    editing = p; draftImgs = p ? (p.images || []).slice() : [];
+    $('editTitle').textContent = p ? 'Edit ' + p.name : 'Add product';
+    $('fName').value = p ? p.name : ''; $('fCat').value = p ? p.category : '';
+    $('fPrice').value = p ? p.price : ''; $('fMax').value = p && p.priceMax ? p.priceMax : '';
+    $('fDesc').value = p ? (p.description || '') : ''; $('fStock').checked = p ? p.inStock !== false : true;
+    $('editMsg').textContent = '';
+    renderPics(); $('editForm').hidden = false; $('editForm').scrollIntoView({behavior:'smooth', block:'start'}); $('fName').focus({preventScroll:true});
+  }
+  function renderPics(){
+    var box = $('pics'); box.textContent = '';
+    draftImgs.forEach(function(src, i){
+      box.appendChild(el('div', {class:'pic'}, [el('img', {src:src, alt:'Photo ' + (i+1)}), el('button', {type:'button', 'aria-label':'Remove photo ' + (i+1), text:'×', onclick:function(){ draftImgs.splice(i,1); renderPics(); }})]));
+    });
+    var inp = el('input', {type:'file', accept:'image/*', multiple:'', id:'fPics'});
+    inp.addEventListener('change', function(){ addFiles(Array.prototype.slice.call(inp.files)); });
+    box.appendChild(el('label', {class:'addpic', style:'position:relative'}, ['+ Add photos', inp]));
+  }
+  function shrink(file){
+    return new Promise(function(res, rej){
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function(){
+        var m = 1100, s = Math.min(1, m / Math.max(img.width, img.height));
+        var c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        c.toBlob(function(b){ b ? res(b) : rej('Could not read that photo.'); }, 'image/jpeg', 0.8);
+      };
+      img.onerror = function(){ rej('Could not read that photo.'); };
+      img.src = url;
+    });
+  }
+  function addFiles(files){
+    var msg = $('editMsg'); if (!files.length) return;
+    msg.textContent = 'Adding ' + files.length + ' photo(s)…';
+    files.reduce(function(chain, f){
+      return chain.then(function(){ return shrink(f); }).then(function(blob){
+        if (state.mode === 'live'){
+          return fetch('/api/upload', {method:'POST', headers:{'content-type':'image/jpeg', 'x-admin-key': sess(PW_KEY) || ''}, body: blob})
+            .then(function(r){ return r.json().then(function(j){ if (!r.ok) throw (j.error || 'Upload failed.'); draftImgs.push(j.url); }); });
+        }
+        return new Promise(function(res){ var fr = new FileReader(); fr.onload = function(){ draftImgs.push(fr.result); res(); }; fr.readAsDataURL(blob); });
+      }).then(renderPics);
+    }, Promise.resolve()).then(function(){ msg.textContent = 'Photos added. Save the product to keep them.'; }, function(err){ msg.textContent = String(err); renderPics(); });
+  }
+  $('editForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var price = Math.max(0, Number($('fPrice').value) || 0), max = Math.max(0, Number($('fMax').value) || 0);
+    var item = { id: editing ? editing.id : 'p' + Date.now().toString(36), name: $('fName').value.trim(), category: $('fCat').value.trim(),
+      price: price, priceMax: max > price ? max : 0, description: $('fDesc').value.trim(), images: draftImgs.slice(), inStock: $('fStock').checked };
+    var list = state.data.products, idx = editing ? list.indexOf(editing) : -1, before = idx >= 0 ? list[idx] : null;
+    if (idx >= 0) list[idx] = item; else list.unshift(item);
+    $('editMsg').textContent = 'Saving…'; $('saveBtn').disabled = true;
+    persist().then(function(){ $('editForm').hidden = true; editing = null; flash('Saved ' + item.name + '. It is now on the shop page.'); renderAll(); },
+      function(err){ if (idx >= 0) list[idx] = before; else list.shift(); $('editMsg').textContent = String(err); })
+      .then(function(){ $('saveBtn').disabled = false; });
+  });
+  $('settingsForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var s = state.data.settings, old = JSON.stringify(s);
+    s.phone = $('sPhone').value.trim(); s.whatsapp = $('sWa').value.replace(/\D/g,''); s.hours = $('sHours').value.trim(); s.location = $('sLoc').value.trim();
+    $('setMsg').textContent = 'Saving…';
+    persist().then(function(){ $('setMsg').textContent = 'Saved.'; renderAll(); }, function(err){ state.data.settings = JSON.parse(old); $('setMsg').textContent = String(err); });
+  });
+
+  function renderAll(){ if (!state.data) return; renderSettings(); renderChips(); renderGrid(); if (location.hash === '#admin') renderAdmin(); }
+  window.addEventListener('hashchange', route);
+  $('yr').textContent = new Date().getFullYear();
+  $('grid').appendChild(el('div', {class:'empty', style:'grid-column:1/-1', text:'Loading products…'}));
+  load().then(route);
+})();
+</script>
+
+</body>
+</html>
