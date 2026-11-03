@@ -22,50 +22,47 @@ python manage.py runserver
 ```
 Open http://127.0.0.1:8000 and http://127.0.0.1:8000/admin/.
 
-## Deploy on the MobKazi VPS (Ubuntu, nginx, Postgres)
+## Deploy on the MobKazi VPS (Docker behind Coolify's Traefik)
+
+The VPS runs every MobKazi app in Docker. Coolify's Traefik proxy (`coolify-proxy`) owns ports 80/443,
+routes each domain to its containers over the `mobkazi-network` Docker network and gets Let's Encrypt
+certificates automatically. `docker-compose.yml` follows the same pattern: a Postgres container, the
+Django app (gunicorn + WhiteNoise for static files) and a small nginx container that serves `/media/`.
+No host ports are published, and Traefik picks the containers up without being restarted.
 
 ```bash
-# 1. Code and Python
-sudo git clone https://github.com/IsaacZachary/swiftsport /srv/swiftsport
+# 1. Code
+git clone https://github.com/IsaacZachary/swiftsport /srv/swiftsport
 cd /srv/swiftsport
-sudo python3 -m venv .venv
-sudo .venv/bin/pip install -r requirements.txt
 
-# 2. Database
-sudo -u postgres psql -c "CREATE USER swiftsport WITH PASSWORD 'pick-a-strong-password';"
-sudo -u postgres psql -c "CREATE DATABASE swiftsport OWNER swiftsport;"
+# 2. Settings: SECRET_KEY, Postgres password and domain (see .env.example)
+cp .env.example .env && nano .env && chmod 600 .env
 
-# 3. Settings: copy, then edit SECRET_KEY, DB password and domain
-sudo cp .env.example .env && sudo nano .env
-#    SECRET_KEY: python3 -c "import secrets; print(secrets.token_urlsafe(50))"
+# 3. Build and start (migrations run automatically when the web container starts)
+docker compose up -d --build
 
-# 4. Set up the database, files and logins
-sudo .venv/bin/python manage.py migrate
-sudo .venv/bin/python manage.py collectstatic --noinput
-sudo .venv/bin/python manage.py import_seed
-sudo .venv/bin/python manage.py createsuperuser          # your MobKazi login
-sudo .venv/bin/python manage.py create_shop_manager wanyama   # prints his temporary password
-sudo mkdir -p media && sudo chown -R www-data:www-data /srv/swiftsport
-
-# 5. App server and web server (change port 8001 if another site uses it)
-sudo cp deploy/swiftsport.service /etc/systemd/system/
-sudo systemctl daemon-reload && sudo systemctl enable --now swiftsport
-sudo cp deploy/nginx-swiftsport.conf /etc/nginx/sites-available/swiftsport
-sudo ln -s /etc/nginx/sites-available/swiftsport /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-
-# 6. HTTPS (after the domain points to the VPS)
-sudo certbot --nginx -d swiftsport.co.ke -d www.swiftsport.co.ke
+# 4. Starting products and logins
+docker compose exec web python manage.py import_seed
+docker compose exec web python manage.py createsuperuser             # your MobKazi login
+docker compose exec web python manage.py create_shop_manager wanyama # prints his temporary password
 ```
+
+DNS: A records for `swiftsport.co.ke` and `www` point to 62.171.151.208. Traefik requests the
+certificates by HTTP challenge, so they are issued once the domain resolves to the VPS. If the
+containers were started before that, trigger a fresh attempt with
+`docker compose up -d --force-recreate web media`. With Cloudflare's proxy (orange cloud) on, set
+SSL/TLS mode to **Full (strict)**.
 
 ## Updating the site later
 
 ```bash
-cd /srv/swiftsport && sudo git pull
-sudo .venv/bin/pip install -r requirements.txt
-sudo .venv/bin/python manage.py migrate
-sudo .venv/bin/python manage.py collectstatic --noinput
-sudo systemctl restart swiftsport
+cd /srv/swiftsport && git pull
+docker compose up -d --build
 ```
 
-Back up the database (`pg_dump swiftsport`) and the `media/` folder regularly: they hold everything Wanyama adds.
+Back up the database and the photos regularly: they hold everything Wanyama adds.
+
+```bash
+docker compose exec -T db pg_dump -U swiftsport swiftsport > swiftsport-$(date +%F).sql
+docker run --rm -v swiftsport_swiftsport-media:/m -v "$PWD":/b alpine tar czf /b/media-$(date +%F).tgz -C /m .
+```
