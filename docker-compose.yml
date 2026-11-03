@@ -5,7 +5,9 @@
 name: swiftsport
 
 services:
-  db:
+  # Service names are prefixed: they become DNS names on the shared mobkazi-network
+  # (which already has a 'db', the main MobKazi Postgres).
+  swiftsport-db:
     image: postgres:16-alpine
     container_name: mobkazi-swiftsport-db
     env_file: .env
@@ -19,13 +21,13 @@ services:
       retries: 10
     restart: always
 
-  web:
+  swiftsport-web:
     build: .
     image: mobkazi-swiftsport:latest
     container_name: mobkazi-swiftsport-web
     env_file: .env
     depends_on:
-      db:
+      swiftsport-db:
         condition: service_healthy
     volumes:
       - swiftsport-media:/app/media
@@ -61,7 +63,7 @@ services:
       - traefik.http.middlewares.swiftsport-to-https.redirectscheme.permanent=true
     restart: always
 
-  media:
+  swiftsport-media:
     image: nginx:alpine
     container_name: mobkazi-swiftsport-media
     volumes:

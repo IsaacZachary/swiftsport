@@ -42,15 +42,15 @@ cp .env.example .env && nano .env && chmod 600 .env
 docker compose up -d --build
 
 # 4. Starting products and logins
-docker compose exec web python manage.py import_seed
-docker compose exec web python manage.py createsuperuser             # your MobKazi login
-docker compose exec web python manage.py create_shop_manager wanyama # prints his temporary password
+docker compose exec swiftsport-web python manage.py import_seed
+docker compose exec swiftsport-web python manage.py createsuperuser             # your MobKazi login
+docker compose exec swiftsport-web python manage.py create_shop_manager wanyama # prints his temporary password
 ```
 
 DNS: A records for `swiftsport.co.ke` and `www` point to 62.171.151.208. Traefik requests the
 certificates by HTTP challenge, so they are issued once the domain resolves to the VPS. If the
 containers were started before that, trigger a fresh attempt with
-`docker compose up -d --force-recreate web media`. With Cloudflare's proxy (orange cloud) on, set
+`docker compose up -d --force-recreate swiftsport-web swiftsport-media`. With Cloudflare's proxy (orange cloud) on, set
 SSL/TLS mode to **Full (strict)**.
 
 ## Updating the site later
@@ -63,6 +63,6 @@ docker compose up -d --build
 Back up the database and the photos regularly: they hold everything Wanyama adds.
 
 ```bash
-docker compose exec -T db pg_dump -U swiftsport swiftsport > swiftsport-$(date +%F).sql
+docker compose exec -T swiftsport-db pg_dump -U swiftsport swiftsport > swiftsport-$(date +%F).sql
 docker run --rm -v swiftsport_swiftsport-media:/m -v "$PWD":/b alpine tar czf /b/media-$(date +%F).tgz -C /m .
 ```
